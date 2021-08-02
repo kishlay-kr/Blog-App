@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<style>
+    body{
+        padding:5%;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<center>
+    <h1>Create your blog</h1>
+</center>
+<form action="." method="POST">
+    {% csrf_token %}
+    
+    {% for field in form %}
+    
+    <div class="mb-3 fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <input type="submit" value="Save" />
+</form>
+{% endblock %}

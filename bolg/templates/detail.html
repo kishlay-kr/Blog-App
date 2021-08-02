@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<style>
+    #header {
+        margin: 2%;
+    }
+
+    body {
+        margin: 4%;
+        background-color: #CECECE;
+    }
+
+    #content {
+        padding: 5%;
+        padding-inline: 10%;
+        font-size:13        0%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="header">
+    <a href="/">
+        <button type="button" class="btn btn-secondary float-end">Home</button>
+    </a>
+    <center>
+        <h1 id="head">Blog</h1>
+    </center>
+
+</div>
+<div id="header">
+    <center>
+        <h1>{{object.title|capfirst}}</h1>
+    </center>
+</div>
+<div>
+    <p>
+        {{object.published_on|date:"D d M Y"}}
+    </p>
+    <p id="content">
+        {{object.full_content}}
+    </p>
+    {% if object.img%}
+    <center>
+        <img src="{{object.img.url}}" />
+    </center>
+    {% endif %}
+    <div class="float-end">
+        <h5>-By {{object.author|capfirst}}</h5>
+    </div>
+
+</div>
+
+    
+
+
+
+{% endblock %}

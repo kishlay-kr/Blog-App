@@ -1,0 +1,115 @@
+{% extends 'base.html'%}
+{% load static %}
+{%block title%}
+Homepage
+{% endblock %}
+{% block head %}
+<style>
+    body {
+        background-color: #E8E8E8;
+        padding: 5%;
+    }
+
+    #head {
+        padding: 2%;
+    }
+
+    .my-row {
+        max-height: 80vh;
+    }
+
+    .container {
+        max-height: 10vw;
+    }
+</style>
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+      integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+      integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <a href="/create">
+        <button type="button" class="btn btn-secondary float-end">New Blog</button>
+    </a>
+    <center>
+        <h1 id="head">Blog</h1>
+    </center>
+
+</div>
+
+
+
+<div class="container">
+
+    <div class="row my-row align-items-around slider">
+
+        {% for item in object_list %}
+        <div class="col-md-6 col-xs-6 col-lg-4">
+            <div class="card" style="width: 18rem; margin:4%;">
+                <div class="card-body my-5">
+                    <h5 class="card-title">{{item.title|capfirst}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{item.published_on}}</h6>
+                    <p class="card-text">{{item.small_desc|capfirst}}</p>
+                    <a href="{{item.pk}}" class="card-link">View</a>
+                    <a href="{{item.pk}}/update" class="card-link">Update</a>
+                    <a href="{{item.pk}}/delete" class="card-link">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+        integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script type="text/javascript">
+    $('.slider').slick({
+        dots: true,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // To unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+</script>
+{% endblock %}
