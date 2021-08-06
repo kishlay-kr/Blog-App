@@ -4,10 +4,10 @@ from django.urls import reverse
 
 class Post(models.Model):
     title = models.CharField(max_length = 255)
-    small_desc = models.TextField()
+    small_desc = models.TextField(max_length=400)   
     full_content = models.TextField()
     published_on = models.DateTimeField(auto_now_add = True)
-    img = models.ImageField(upload_to='images/', blank = True )
+    img = models.ImageField(upload_to='images/', blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     edited_on = models.DateTimeField(auto_now = True)
     likes = models.ManyToManyField(User, blank = True , related_name = 'likes')

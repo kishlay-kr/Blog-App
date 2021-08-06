@@ -33,10 +33,23 @@ class BlogDetailView(DetailView):
     #    id_ = self.kwargs.get('id')
     #    return get_object_or_404(Post, id=id_)
 
-class BlogCreateView(CreateView):
-    template_name = 'create.html'
-    form_class = BlogModelForm
-    queryset = Post.objects.all() 
+#class BlogCreateView(CreateView):
+#    template_name = 'create.html'
+#    form_class = BlogModelForm
+#    queryset = Post.objects.all() 
+
+def BlogCreateView(request):
+    form = BlogModelForm()
+    if(request.method == 'POST'):
+        form = BlogModelForm(request.POST, request.FILES )    
+        if form.is_valid():
+            form.save()
+
+    context = {
+        'form' : form
+        }
+
+    return render(request, 'create.html', context )
 
 
 
@@ -44,6 +57,25 @@ class BlogUpdateView(UpdateView):
     template_name = 'create.html'
     form_class = BlogModelForm
     queryset = Post.objects.all() 
+
+
+#def BlogUpdateView(request, pk):
+#    #print('\n\n\n')
+#    #print(pk)
+#    obj = Post.objects.get(id = pk)
+#    form = BlogModelForm(instance = obj )
+#    if(request.method == 'POST'):
+#        if form.is_valid():
+#            form.save() 
+#            return redirect('/pk')
+#    context = {
+#        'form' : form
+#        }
+#    return render(request, 'create.html', context )
+    
+
+
+
 
 
 def BlogDeleteView(request, pk):
@@ -57,3 +89,4 @@ def BlogDeleteView(request, pk):
         'obj':obj
         }
     return render(request, 'delete.html', context)
+

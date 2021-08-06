@@ -18,13 +18,26 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import BlogListView , BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView
+from django.views.generic.base import RedirectView
 
+from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
+from . import views
+from . models import User
+from django.contrib import admin
+ 
 app_name='bolg'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',BlogListView.as_view(), name='homepage'),
     path('<int:pk>',BlogDetailView.as_view(), name='detail_url'),
-    path('create/',BlogCreateView.as_view(), name='create_url'),
+    path('create/',BlogCreateView, name='create_url'),
     path('<int:pk>/update/',BlogUpdateView.as_view(), name='update_url'),
     path('<int:pk>/delete',BlogDeleteView, name='delete_url'),
+
+     path('favicon.ico/', RedirectView.as_view(url='/static/img/favicon.ico')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
