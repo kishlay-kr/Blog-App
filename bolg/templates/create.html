@@ -7,6 +7,7 @@
         background-color: #E1E6E7;
         /*overflow-y:hidden;*/
     }
+
     .div-1 {
         margin-inline: auto;
         width: 40vw;
@@ -41,8 +42,9 @@
 
 
 <div class="div-1">
-    <form action="." method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="csrfmiddlewaretoken" value="sG1NCISUkpRLmkYCCyGtzJcvdbvrVZTmyJCMS0RFXAGDoQPMTJxt5weS6A60zyp2">
+    <form action=""  method="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <!--<input type="hidden" name="csrfmiddlewaretoken" value="sG1NCISUkpRLmkYCCyGtzJcvdbvrVZTmyJCMS0RFXAGDoQPMTJxt5weS6A60zyp2">-->
         <p><label for="id_title" class="col-sm-2 col-form-label">Title:</label> <input type="text" name="title" maxlength="255" required id="id_title"></p>
         <p>
             <label for="id_small_desc" class="col-sm-2 col-form-label">Small desc:</label> <textarea name="small_desc" cols="40" rows="5" maxlength="400" required id="id_small_desc">

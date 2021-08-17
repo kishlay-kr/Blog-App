@@ -42,8 +42,10 @@ def BlogCreateView(request):
     form = BlogModelForm()
     if(request.method == 'POST'):
         form = BlogModelForm(request.POST, request.FILES )    
+        print(request.FILES)
         if form.is_valid():
             form.save()
+        return redirect('../../')
 
     context = {
         'form' : form
@@ -53,25 +55,30 @@ def BlogCreateView(request):
 
 
 
-class BlogUpdateView(UpdateView):
-    template_name = 'create.html'
-    form_class = BlogModelForm
-    queryset = Post.objects.all() 
+#class BlogUpdateView(UpdateView):
+#    template_name = 'create.html'
+#    form_class = BlogModelForm
+#    queryset = Post.objects.all() 
 
 
-#def BlogUpdateView(request, pk):
-#    #print('\n\n\n')
-#    #print(pk)
-#    obj = Post.objects.get(id = pk)
-#    form = BlogModelForm(instance = obj )
-#    if(request.method == 'POST'):
-#        if form.is_valid():
-#            form.save() 
-#            return redirect('/pk')
-#    context = {
-#        'form' : form
-#        }
-#    return render(request, 'create.html', context )
+def BlogUpdateView(request, pk):
+    
+    obj = get_object_or_404(Post, id=pk)
+    form = BlogModelForm(instance = obj)
+    if request.method=='POST':
+
+        form = BlogModelForm(request.POST, request.FILES , instance = obj)
+        
+        if form.is_valid():
+            form.save()
+        return redirect('../../')
+    
+    
+    context = {
+        'form' : form,
+        'obj' : obj
+        }
+    return render(request, 'update.html', context )
     
 
 

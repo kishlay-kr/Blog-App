@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<style>
+    body {
+        padding: 5%;
+        background-color: #E1E6E7;
+        /*overflow-y:hidden;*/
+    }
+    .div-1 {
+        margin-inline: auto;
+        width: 40vw;
+        background-color: #E1E1E1;
+        padding: 2%;
+        border-radius: 2%;
+        box-shadow: 0px 5px 20px 2px #888888;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="header">
+    <a href="/">
+        <button type="button" class="btn btn-secondary float-end">Home</button>
+    </a>
+    <center>
+        <h1 style=" padding-bottom:2%;">Update your blog</h1>
+    </center>
+
+</div>
+
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Save" />
+</form>
+
+
+<!--formatted form-->
+<!--div class="div-1">
+    <form action="" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrfmiddlewaretoken" value="AFHxEnHr1vfxMVEhcfGveXEr0cjriGnQIa3jfE5nkWXvR489OlACFMG8XdfXdOHo">
+        <p><label for="id_title" class="col-sm-2 col-form-label">Title:</label> <input type="text" name="title" value="{{obj.title}}" maxlength="255" required id="id_title"></p>
+        <p>
+            <label for="id_small_desc" class="col-sm-2 col-form-label">Small desc:</label> <textarea name="small_desc" cols="40" rows="5" maxlength="400" required id="id_small_desc">
+        {{obj.small_desc}}</textarea>
+        </p>
+        <p>
+            <label for="id_full_content" class="col-sm-2 col-form-label"> Full content:</label> <textarea name="full_content" cols="40" rows="10" required id="id_full_content">
+        {{obj.full_content}}</textarea>
+        </p>
+        <p>
+            {% if obj.img %}
+            <label for="id_img" class="col-sm-2 col-form-label">Img:</label> Currently: <a href="{{obj.img.url}}">current_img</a>
+            <input type="checkbox" name="img-clear" id="img-clear_id">
+            <label for="img-clear_id">Clear</label><br>
+            Change:
+            <input type="file" name="img" accept="image/*" id="id_img">
+            {% else %}
+            Add img: <input type="file" name="img" accept="image/*" id="id_img" />
+            {% endif %}
+
+
+
+        </p>
+        <center><input type="submit" class="btn btn-success px-5 " value="Save" /></center>
+    </form>
+</div>-->
+
+
+<!--formatted form-->
+
+
+
+{% endblock %}

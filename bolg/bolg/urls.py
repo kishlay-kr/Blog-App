@@ -33,7 +33,7 @@ urlpatterns = [
     path('',BlogListView.as_view(), name='homepage'),
     path('<int:pk>',BlogDetailView.as_view(), name='detail_url'),
     path('create/',BlogCreateView, name='create_url'),
-    path('<int:pk>/update/',BlogUpdateView.as_view(), name='update_url'),
+    path('<int:pk>/update/',BlogUpdateView, name='update_url'),
     path('<int:pk>/delete',BlogDeleteView, name='delete_url'),
 
      path('favicon.ico/', RedirectView.as_view(url='/static/img/favicon.ico')),
