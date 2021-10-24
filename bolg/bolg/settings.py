@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bolg',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +134,13 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+#S3 Bucket Config
+AWS_ACCESS_KEY_ID = 'AKIATFPXQLTSSELMNG6F'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'django-backend-bkt'
+
+AWS_QUERYSTRING_AUTH = False
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
