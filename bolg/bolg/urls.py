@@ -26,6 +26,9 @@ from django.conf import settings
 from . import views
 from . models import User
 from django.contrib import admin
+
+from django.views.static import serve
+from django.conf.urls import url
  
 app_name='bolg'
 urlpatterns = [
@@ -36,6 +39,9 @@ urlpatterns = [
     path('<int:pk>/update/',BlogUpdateView, name='update_url'),
     path('<int:pk>/delete',BlogDeleteView, name='delete_url'),
     path('favicon.ico/', RedirectView.as_view(url='/static/img/favicon.ico')),
+    
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
 
 if settings.DEBUG:
