@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,8 +24,9 @@ SECRET_KEY = 'django-insecure-e96xf#b*^h@+--&laz%i3abjgin=7ecq7t37cj9e-57@&5od72
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+DEVELOPMENT_MODE = False
 
-ALLOWED_HOSTS = ['127.0.0.1' , 'sampledomain.com']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS" , "127.0.0.1,localhost").split(",")
 
 
 # Application definition
@@ -128,7 +129,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-import os
 from pathlib import Path
 
 STATIC_URL = '/static/'
