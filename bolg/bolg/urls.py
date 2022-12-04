@@ -35,8 +35,7 @@ urlpatterns = [
     path('create/',BlogCreateView, name='create_url'),
     path('<int:pk>/update/',BlogUpdateView, name='update_url'),
     path('<int:pk>/delete',BlogDeleteView, name='delete_url'),
-
-     path('favicon.ico/', RedirectView.as_view(url='/static/img/favicon.ico')),
+    path('favicon.ico/', RedirectView.as_view(url='/static/img/favicon.ico')),
 ]
 
 if settings.DEBUG:
